@@ -217,5 +217,13 @@ npm run preview
 
 ---
 
+## 📑 Project Report & Academic Deliverables
+The complete 13-page academic UI/UX project report conforming strictly to the course template (Times New Roman, 12pt body, 14pt headings, 1.5 line spacing, justified alignment) is included directly in the repository root:
+- **[PDF Report (13 Pages)](./AccessAudit_UI_UX_Project_Report.pdf)**: `AccessAudit_UI_UX_Project_Report.pdf` (Strict 13-page submission version)
+- **[Word Document Report](./AccessAudit_UI_UX_Project_Report.docx)**: `AccessAudit_UI_UX_Project_Report.docx` (Fully formatted editable report)
+- **[Illustrated Report (with Figures & Screenshots)](./AccessAudit_UI_UX_Illustrated_Report.docx)**: `AccessAudit_UI_UX_Illustrated_Report.docx` (Extended report with embedded figures and visual evidence)
+
+---
+
 ## 📄 License
 MIT © 2026 Shreyas M
