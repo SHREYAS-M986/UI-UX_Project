@@ -1,0 +1,12 @@
+Category,Foreground,Background,Context,Ratio,Ratio_Text,WCAG_AA_Normal (4.5:1),WCAG_AA_Large (3.0:1),WCAG_AAA (7.0:1),Status
+Design Token Pair,Forest Black (#15231C),Mist White (#ECECE4),Primary text on Mist card surfaces,13.72,13.72:1,Pass,Pass,Pass,Pass AAA
+Design Token Pair,Deep Green (#21402A),Mist White (#ECECE4),Deep Green headings/accents on Mist,9.66,9.66:1,Pass,Pass,Pass,Pass AAA
+Design Token Pair,Amber Brown (#8B6222),Mist White (#ECECE4),Critical status indicator text on Mist,4.57,4.57:1,Pass,Pass,Fail,Pass AA
+Design Token Pair,Taupe (#A08569),Mist White (#ECECE4),Serious status indicator text on Mist,2.92,2.92:1,Fail,Fail,Fail,Fail
+Design Token Pair,Forest Black (#15231C),Taupe (#A08569),Forest Black text on Taupe badge container,4.7,4.7:1,Pass,Pass,Fail,Pass AA
+Design Token Pair,Forest Black (#15231C),Amber Brown (#8B6222),Forest Black text on Amber container,3.0,3.0:1,Fail,Pass,Fail,Pass AA Large
+Design Token Pair,Mist White (#ECECE4),Forest Black (#15231C),Mist White text on Forest Black sidebar/button,13.72,13.72:1,Pass,Pass,Pass,Pass AAA
+Design Token Pair,Mist White (#ECECE4),Deep Green (#21402A),Mist White text on Deep Green progress bar,9.66,9.66:1,Pass,Pass,Pass,Pass AAA
+Design Token Pair,Forest Black (#15231C),Background Sage Base (#D9DFD5),Primary text directly on outer canvas,12.0,12.0:1,Pass,Pass,Pass,Pass AAA
+Rendered Glass Sample (Worst-Case),Forest Black Text (#15231C),"Darkest Glass Pixel (20, 34, 26)",Body text rendered over blurred glass canvas (Worst Case),1.01,1.01:1,Fail,Fail,Fail,Fail
+Rendered Glass Sample (Best-Case),Forest Black Text (#15231C),"Lightest Glass Pixel (246, 246, 243)",Body text rendered over blurred glass canvas (Best Case),15.05,15.05:1,Pass,Pass,Pass,Pass AAA

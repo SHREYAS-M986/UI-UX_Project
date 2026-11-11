@@ -1,0 +1,37 @@
+{
+  "overview": {
+    "violationsCount": 0,
+    "passesCount": 42,
+    "incompleteCount": 1,
+    "inapplicableCount": 49,
+    "violations": []
+  },
+  "issues": {
+    "violationsCount": 0,
+    "passesCount": 40,
+    "incompleteCount": 1,
+    "inapplicableCount": 51,
+    "violations": []
+  },
+  "pages": {
+    "violationsCount": 0,
+    "passesCount": 39,
+    "incompleteCount": 1,
+    "inapplicableCount": 52,
+    "violations": []
+  },
+  "reports": {
+    "violationsCount": 0,
+    "passesCount": 43,
+    "incompleteCount": 1,
+    "inapplicableCount": 48,
+    "violations": []
+  },
+  "settings": {
+    "violationsCount": 0,
+    "passesCount": 39,
+    "incompleteCount": 1,
+    "inapplicableCount": 52,
+    "violations": []
+  }
+}

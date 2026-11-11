@@ -1,0 +1,38 @@
+[
+  {
+    "tagName": "A",
+    "ariaLabel": "Skip to main content",
+    "id": "",
+    "className": "sr-only focus:not-sr-only focus:fixed fo"
+  },
+  {
+    "tagName": "DIV",
+    "ariaLabel": "AccessAudit Home",
+    "id": "",
+    "className": "w-12 h-12 rounded-2xl flex items-center "
+  },
+  {
+    "tagName": "BUTTON",
+    "ariaLabel": "Overview",
+    "id": "",
+    "className": "w-full flex flex-col items-center justif"
+  },
+  {
+    "tagName": "BUTTON",
+    "ariaLabel": "Issues",
+    "id": "",
+    "className": "w-full flex flex-col items-center justif"
+  },
+  {
+    "tagName": "BUTTON",
+    "ariaLabel": "Pages",
+    "id": "",
+    "className": "w-full flex flex-col items-center justif"
+  },
+  {
+    "tagName": "BUTTON",
+    "ariaLabel": "Reports",
+    "id": "",
+    "className": "w-full flex flex-col items-center justif"
+  }
+]
