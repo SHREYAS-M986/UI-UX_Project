@@ -1,18 +1,15 @@
 import React from 'react';
 import { GlassCard } from './GlassCard';
 import { Trophy, Flame, PartyPopper } from 'lucide-react';
-import { PROGRESS_DATA } from '@/data/mockData';
+import { useAuditStore } from '@/lib/store';
 
-interface ProgressCardProps {
-  fixedCount?: number;
-  totalCount?: number;
-}
+export const ProgressCard: React.FC = () => {
+  const issues = useAuditStore((state) => state.issues);
+  const streak = useAuditStore((state) => state.streak);
 
-export const ProgressCard: React.FC<ProgressCardProps> = ({
-  fixedCount = PROGRESS_DATA.fixedCount,
-  totalCount = PROGRESS_DATA.totalCount,
-}) => {
-  const percentage = Math.round((fixedCount / totalCount) * 100);
+  const totalCount = issues.length;
+  const fixedCount = issues.filter((i) => i.isFixed).length;
+  const percentage = totalCount > 0 ? Math.round((fixedCount / totalCount) * 100) : 100;
 
   return (
     <GlassCard className="p-5 flex flex-col justify-between">
@@ -55,10 +52,10 @@ export const ProgressCard: React.FC<ProgressCardProps> = ({
           </div>
           <div>
             <div className="text-xs font-bold text-forest">
-              {PROGRESS_DATA.streakDays} Day Streak
+              {streak.currentStreak} Day Streak
             </div>
             <div className="text-[11px] text-forest-500 font-medium">
-              {PROGRESS_DATA.streakMessage}
+              {streak.currentStreak > 0 ? 'Keep going!' : 'Start your streak today!'}
             </div>
           </div>
         </div>
@@ -69,4 +66,3 @@ export const ProgressCard: React.FC<ProgressCardProps> = ({
     </GlassCard>
   );
 };
-
