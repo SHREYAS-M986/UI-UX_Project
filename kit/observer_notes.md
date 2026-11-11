@@ -26,3 +26,4 @@
 - **2 = Minor usability problem**: Low priority; fixing will improve ease of use.
 - **3 = Major usability problem**: High priority; causes user confusion or delays completion.
 - **4 = Usability catastrophe**: Imperative to fix; prevents user from completing primary task.
+

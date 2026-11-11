@@ -233,3 +233,4 @@ APPENDICES_DATA = [
 ]
 
 print("Loaded References and Appendices data structures successfully.")
+

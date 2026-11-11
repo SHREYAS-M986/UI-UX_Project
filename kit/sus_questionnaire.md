@@ -30,3 +30,4 @@ Please select the rating that most accurately reflects your immediate impression
   - $\ge 80.3$: Grade A (Top 10% usability)
   - $68.0–80.2$: Grade B / Average (Acceptable)
   - $< 68.0$: Below average (Usability concerns present)
+

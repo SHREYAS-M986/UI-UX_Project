@@ -89,3 +89,4 @@ To finalize the report with authentic empirical data:
 4. **Scanned Hand Sketches (Chapter 5)**: Photograph or scan 1–2 pages of preliminary paper ideation sketches and place them into `/evidence/scanned_sketches/`.
 5. **Student Metadata**: Fill in `[Student Name]`, `[USN]`, `[Section]`, `[Sl No]`, `[DD-MM-YYYY]`, `[20XX-XX]`.
 6. **Student Reflection (Chapter 10)**: Provide personal answers to the 3 guided reflection prompts regarding project challenges and learnings.
+

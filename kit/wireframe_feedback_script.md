@@ -27,3 +27,4 @@ Log feedback into `evidence/research_data.xlsx` (`Wireframe_Feedback` sheet):
 - **Screen Evaluated**: (Overview / Modal / Drawer / Scatter Plot)
 - **Specific Observation / Critique**: Verbatim comments on layout, clarity, or missing elements.
 - **Action Taken in Final Design**: Corresponding design iteration implemented.
+

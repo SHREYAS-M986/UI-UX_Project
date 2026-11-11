@@ -32,3 +32,4 @@ To ensure broad workflow coverage, participants must be distributed across four 
 - Participants access the live web app directly: `https://access-audit-roan.vercel.app`.
 - Session hosted via screen-share (Google Meet / Zoom) or conducted in a computer lab setting.
 - Observer records screen audio, task start/stop times with a stopwatch, and logs observations into `evidence/research_data.xlsx`.
+

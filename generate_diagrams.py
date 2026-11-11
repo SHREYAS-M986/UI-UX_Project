@@ -496,3 +496,4 @@ if __name__ == '__main__':
     generate_grayscale_wireframes()
     generate_persona_cards()
     generate_system_architecture()
+

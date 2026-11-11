@@ -37,3 +37,4 @@
 - Solicit any final thoughts or suggestions.
 - Inform participant about subsequent prototype usability testing sessions.
 - Thank participant and conclude session. Log responses into `evidence/research_data.xlsx` (`Interview_Notes`).
+
