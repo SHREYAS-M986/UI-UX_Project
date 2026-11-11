@@ -39,7 +39,6 @@ export const FixList: React.FC<FixListProps> = ({ onViewAllIssues }) => {
           type="button"
           onClick={onViewAllIssues}
           className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-forest-700 hover:text-forest transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deep-green rounded-lg px-2 py-1"
-          aria-label={`View all ${issues.length} detected issues`}
         >
           <span>View all issues</span>
           <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -64,7 +63,6 @@ export const FixList: React.FC<FixListProps> = ({ onViewAllIssues }) => {
                 onClick={() => openDrawer(issue.id)}
                 tabIndex={0}
                 role="button"
-                aria-label={`View remediation details for ${issue.wcagCode}`}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     openDrawer(issue.id);

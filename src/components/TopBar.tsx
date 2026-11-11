@@ -133,7 +133,6 @@ export const TopBar: React.FC = () => {
             size="md"
             onClick={() => setAuditModalOpen(true)}
             className="rounded-full shadow-glass-button gap-2 text-xs sm:text-sm font-semibold px-5"
-            aria-label="Re-run accessibility audit"
           >
             <RefreshCw className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Re-run audit</span>
@@ -148,7 +147,6 @@ export const TopBar: React.FC = () => {
           size="md"
           onClick={() => setAuditModalOpen(true)}
           className="w-full rounded-full gap-2 text-sm font-semibold"
-          aria-label="Re-run accessibility audit"
         >
           <RefreshCw className="w-4 h-4" aria-hidden="true" />
           <span>Re-run audit</span>

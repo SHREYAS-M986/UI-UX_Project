@@ -300,3 +300,4 @@ export function calculateAccessibilityScore(issues: PrioritisedIssueGroup[]): nu
   const score = Math.round(100 - totalDeduction);
   return Math.max(10, Math.min(100, score));
 }
+

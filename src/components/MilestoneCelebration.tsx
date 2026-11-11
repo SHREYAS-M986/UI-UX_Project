@@ -63,3 +63,4 @@ export const MilestoneCelebration: React.FC = () => {
     </div>
   );
 };
+

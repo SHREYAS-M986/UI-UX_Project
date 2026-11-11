@@ -118,3 +118,4 @@ export const DEMO_PAGE_HTML = `<!DOCTYPE html>
   </main>
 </body>
 </html>`;
+

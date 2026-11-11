@@ -95,3 +95,4 @@ export const PagesView: React.FC = () => {
     </div>
   );
 };
+

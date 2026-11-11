@@ -128,3 +128,4 @@ export async function fetchPageHtml(targetUrl: string): Promise<{ html: string; 
     throw new Error('An unexpected error occurred while fetching the URL.');
   }
 }
+

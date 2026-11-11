@@ -155,7 +155,6 @@ export const IssuesView: React.FC = () => {
                   onClick={() => openDrawer(issue.id)}
                   tabIndex={0}
                   role="button"
-                  aria-label={`Open details for ${issue.wcagCode}`}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       openDrawer(issue.id);

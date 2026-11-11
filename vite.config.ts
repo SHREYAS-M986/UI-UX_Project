@@ -51,4 +51,15 @@ export default defineConfig({
     port: 5173,
     host: true,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'axe-vendor': ['axe-core'],
+          'react-vendor': ['react', 'react-dom'],
+          'icons-vendor': ['lucide-react'],
+        },
+      },
+    },
+  },
 });
