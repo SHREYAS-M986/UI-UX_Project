@@ -75,3 +75,4 @@ Testing 5 software engineers on 3 core tasks revealed:
 ### Q6: Can automated audits guarantee 100% WCAG compliance?
 **Answer**:  
 No. Automated engines (like axe-core or Lighthouse) can only test approximately 30–40% of WCAG criteria. Automated tools cannot judge if an alt text is contextually meaningful, if a heading hierarchy reflects logical semantics, or if screen reader announcements feel natural. AccessAudit prominently displays this disclaimer to ensure developers combine automated triage with manual assistive technology verification.
+
