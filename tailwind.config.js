@@ -1,0 +1,97 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        forest: {
+          DEFAULT: '#15231C',
+          50: 'rgba(21, 35, 28, 0.04)',
+          100: 'rgba(21, 35, 28, 0.08)',
+          200: 'rgba(21, 35, 28, 0.15)',
+          300: 'rgba(21, 35, 28, 0.25)',
+          400: 'rgba(21, 35, 28, 0.45)',
+          500: 'rgba(21, 35, 28, 0.65)',
+          600: 'rgba(21, 35, 28, 0.82)',
+          700: 'rgba(21, 35, 28, 0.90)',
+          800: '#15231C',
+          900: '#0E1713',
+        },
+        'deep-green': {
+          DEFAULT: '#21402A',
+          50: 'rgba(33, 64, 42, 0.06)',
+          100: 'rgba(33, 64, 42, 0.12)',
+          200: 'rgba(33, 64, 42, 0.22)',
+          300: 'rgba(33, 64, 42, 0.35)',
+          400: 'rgba(33, 64, 42, 0.55)',
+          500: '#21402A',
+          600: '#193221',
+          700: '#132619',
+        },
+        mist: {
+          DEFAULT: '#ECECE4',
+          50: 'rgba(236, 236, 228, 0.10)',
+          100: 'rgba(236, 236, 228, 0.20)',
+          200: 'rgba(236, 236, 228, 0.35)',
+          300: 'rgba(236, 236, 228, 0.45)',
+          400: 'rgba(236, 236, 228, 0.55)',
+          500: 'rgba(236, 236, 228, 0.70)',
+          600: 'rgba(236, 236, 228, 0.85)',
+          700: '#E4E4D9',
+          800: '#D5D5C8',
+        },
+        amber: {
+          DEFAULT: '#8B6222',
+          tint: 'rgba(139, 98, 34, 0.12)',
+          border: 'rgba(139, 98, 34, 0.30)',
+          glow: 'rgba(139, 98, 34, 0.20)',
+        },
+        taupe: {
+          DEFAULT: '#A08569',
+          tint: 'rgba(160, 133, 105, 0.14)',
+          border: 'rgba(160, 133, 105, 0.32)',
+          glow: 'rgba(160, 133, 105, 0.20)',
+        },
+      },
+      borderRadius: {
+        'glass-sm': '14px',
+        'glass-md': '20px',
+        'glass-lg': '24px',
+        'glass-xl': '28px',
+      },
+      boxShadow: {
+        'glass-card': '0 12px 32px 0 rgba(21, 35, 28, 0.08), 0 2px 6px 0 rgba(21, 35, 28, 0.04), inset 0 1px 1px 0 rgba(255, 255, 255, 0.85)',
+        'glass-sidebar': '0 24px 48px 0 rgba(21, 35, 28, 0.28), 0 4px 12px 0 rgba(21, 35, 28, 0.12), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15)',
+        'glass-button': '0 4px 12px 0 rgba(21, 35, 28, 0.18), inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.25)',
+        'glass-inset': 'inset 0 2px 4px 0 rgba(21, 35, 28, 0.06)',
+      },
+      fontFamily: {
+        sans: [
+          'Inter',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'sans-serif',
+        ],
+        mono: [
+          'ui-monospace',
+          'SFMono-Regular',
+          'Menlo',
+          'Monaco',
+          'Consolas',
+          'Liberation Mono',
+          'Courier New',
+          'monospace',
+        ],
+      },
+    },
+  },
+  plugins: [],
+};
+
