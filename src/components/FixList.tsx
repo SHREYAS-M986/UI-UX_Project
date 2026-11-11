@@ -1,32 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { GlassCard } from './GlassCard';
 import { SeverityBadge } from './SeverityBadge';
 import { Button } from './Button';
-import { PRIORITIZED_ISSUES, AuditIssue } from '@/data/mockData';
+import { useAuditStore } from '@/lib/store';
 import { Wrench, ArrowRight, FileText, Clock, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface FixListProps {
-  onIssueStatusChange?: (id: string, isFixed: boolean) => void;
+  onViewAllIssues?: () => void;
 }
 
-export const FixList: React.FC<FixListProps> = ({ onIssueStatusChange }) => {
-  const [issues, setIssues] = useState<AuditIssue[]>(PRIORITIZED_ISSUES);
+export const FixList: React.FC<FixListProps> = ({ onViewAllIssues }) => {
+  const issues = useAuditStore((state) => state.issues);
+  const toggleIssueFixed = useAuditStore((state) => state.toggleIssueFixed);
+  const openDrawer = useAuditStore((state) => state.openDrawer);
 
-  const toggleFixed = (id: string) => {
-    setIssues((prev) =>
-      prev.map((issue) => {
-        if (issue.id === id) {
-          const nextFixed = !issue.isFixed;
-          if (onIssueStatusChange) {
-            onIssueStatusChange(id, nextFixed);
-          }
-          return { ...issue, isFixed: nextFixed };
-        }
-        return issue;
-      })
-    );
-  };
+  // Top 5 prioritized issues by priorityRatio (impact ÷ effort)
+  const topIssues = [...issues]
+    .sort((a, b) => b.priorityRatio - a.priorityRatio)
+    .slice(0, 5);
 
   return (
     <GlassCard className="p-4 sm:p-5 lg:p-6 w-full">
@@ -45,8 +37,9 @@ export const FixList: React.FC<FixListProps> = ({ onIssueStatusChange }) => {
 
         <button
           type="button"
+          onClick={onViewAllIssues}
           className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-forest-700 hover:text-forest transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deep-green rounded-lg px-2 py-1"
-          aria-label="View all issues (22 total)"
+          aria-label={`View all ${issues.length} detected issues`}
         >
           <span>View all issues</span>
           <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -55,7 +48,7 @@ export const FixList: React.FC<FixListProps> = ({ onIssueStatusChange }) => {
 
       {/* Issues Rows */}
       <div className="divide-y divide-forest-100/30">
-        {issues.map((issue) => (
+        {topIssues.map((issue) => (
           <div
             key={issue.id}
             className={cn(
@@ -66,12 +59,23 @@ export const FixList: React.FC<FixListProps> = ({ onIssueStatusChange }) => {
             {/* Desktop & Tablet Flex Row Layout */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-2.5 sm:gap-3">
               {/* Left group: Badge + Criterion */}
-              <div className="flex items-center gap-2.5 min-w-0 flex-shrink-0">
+              <div
+                className="flex items-center gap-2.5 min-w-0 flex-shrink-0 cursor-pointer group"
+                onClick={() => openDrawer(issue.id)}
+                tabIndex={0}
+                role="button"
+                aria-label={`View remediation details for ${issue.wcagCode}`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    openDrawer(issue.id);
+                  }
+                }}
+              >
                 <div className="flex-shrink-0">
                   <SeverityBadge severity={issue.severity} />
                 </div>
                 <div className="w-32 lg:w-36 xl:w-44 flex-shrink-0">
-                  <div className="text-xs sm:text-sm font-bold text-forest leading-tight truncate">
+                  <div className="text-xs sm:text-sm font-bold text-forest leading-tight truncate group-hover:text-deep-green transition-colors">
                     {issue.wcagCode}
                   </div>
                   <p className="text-[11px] text-forest-600 truncate mt-0.5">
@@ -111,11 +115,11 @@ export const FixList: React.FC<FixListProps> = ({ onIssueStatusChange }) => {
                 <Button
                   variant={issue.isFixed ? 'secondary' : 'primary'}
                   size="sm"
-                  onClick={() => toggleFixed(issue.id)}
+                  onClick={() => toggleIssueFixed(issue.id)}
                   aria-pressed={issue.isFixed}
                   aria-label={`${issue.isFixed ? 'Mark as not fixed' : 'Mark as fixed'}: ${issue.wcagCode}`}
                   className={cn(
-                    'min-h-[38px] px-3.5 font-semibold text-xs rounded-full whitespace-nowrap',
+                    'min-h-[38px] px-3.5 font-semibold text-xs rounded-full whitespace-nowrap transition-transform active:scale-95',
                     issue.isFixed
                       ? 'bg-deep-green-100 text-deep-green border-deep-green-300'
                       : 'bg-forest hover:bg-forest-900'

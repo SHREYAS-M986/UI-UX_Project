@@ -1,28 +1,17 @@
 import React, { useState } from 'react';
 import { Button } from './Button';
 import { ChevronDown, Search, Sun, RefreshCw, Check } from 'lucide-react';
-import { AUDIT_STATS } from '@/data/mockData';
+import { useAuditStore } from '@/lib/store';
 
-interface TopBarProps {
-  onRerunAudit?: () => void;
-  isRunningAudit?: boolean;
-}
+export const TopBar: React.FC = () => {
+  const { projectName, userInitials, setProjectName, searchQuery, setSearchQuery, setAuditModalOpen } =
+    useAuditStore();
 
-export const TopBar: React.FC<TopBarProps> = ({
-  onRerunAudit,
-  isRunningAudit = false,
-}) => {
   const [projectOpen, setProjectOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [showRerunNotice, setShowRerunNotice] = useState(false);
 
-  const handleRerun = () => {
-    if (onRerunAudit) {
-      onRerunAudit();
-    } else {
-      setShowRerunNotice(true);
-      setTimeout(() => setShowRerunNotice(false), 2500);
-    }
+  const handleSelectProject = (name: string) => {
+    setProjectName(name);
+    setProjectOpen(false);
   };
 
   return (
@@ -37,10 +26,10 @@ export const TopBar: React.FC<TopBarProps> = ({
           onClick={() => setProjectOpen(!projectOpen)}
           aria-expanded={projectOpen}
           aria-haspopup="listbox"
-          aria-label="Switch project: Current is My Web Project"
+          aria-label={`Switch project: Current is ${projectName}`}
           className="inline-flex items-center gap-2 text-base sm:text-lg font-bold text-forest hover:opacity-85 transition-opacity py-1 px-2 -ml-2 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deep-green"
         >
-          <span>{AUDIT_STATS.projectName}</span>
+          <span>{projectName}</span>
           <ChevronDown
             className={`w-4 h-4 text-forest-500 transition-transform duration-200 ${
               projectOpen ? 'rotate-180' : ''
@@ -57,34 +46,24 @@ export const TopBar: React.FC<TopBarProps> = ({
             <div className="text-[11px] font-semibold text-forest-500 px-3 py-1.5 uppercase tracking-wider">
               Switch Project
             </div>
-            <button
-              type="button"
-              role="option"
-              aria-selected="true"
-              onClick={() => setProjectOpen(false)}
-              className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-forest bg-mist-300/80 text-left"
-            >
-              <span>My Web Project</span>
-              <Check className="w-3.5 h-3.5 text-deep-green" aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              role="option"
-              aria-selected="false"
-              onClick={() => setProjectOpen(false)}
-              className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-forest hover:bg-mist-200/60 text-left mt-1"
-            >
-              <span>Design System Docs</span>
-            </button>
-            <button
-              type="button"
-              role="option"
-              aria-selected="false"
-              onClick={() => setProjectOpen(false)}
-              className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-forest hover:bg-mist-200/60 text-left mt-1"
-            >
-              <span>E-Commerce Portal</span>
-            </button>
+            {['My Web Project', 'Design System Docs', 'E-Commerce Portal'].map((pName) => {
+              const isSelected = projectName === pName;
+              return (
+                <button
+                  key={pName}
+                  type="button"
+                  role="option"
+                  aria-selected={isSelected}
+                  onClick={() => handleSelectProject(pName)}
+                  className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-forest text-left mt-0.5 ${
+                    isSelected ? 'bg-mist-300/80' : 'hover:bg-mist-200/60'
+                  }`}
+                >
+                  <span>{pName}</span>
+                  {isSelected && <Check className="w-3.5 h-3.5 text-deep-green" aria-hidden="true" />}
+                </button>
+              );
+            })}
           </div>
         )}
 
@@ -99,9 +78,9 @@ export const TopBar: React.FC<TopBarProps> = ({
           </button>
           <div
             className="w-10 h-10 rounded-full bg-forest text-mist flex items-center justify-center text-xs font-bold border border-white/20 select-none shadow-sm"
-            aria-label="User profile: SM"
+            aria-label={`User profile: ${userInitials}`}
           >
-            {AUDIT_STATS.userInitials}
+            {userInitials}
           </div>
         </div>
       </div>
@@ -141,37 +120,24 @@ export const TopBar: React.FC<TopBarProps> = ({
         <div
           tabIndex={0}
           role="button"
-          aria-label="User menu for SM"
+          aria-label={`User menu for ${userInitials}`}
           className="w-9 h-9 rounded-full bg-forest text-mist flex items-center justify-center text-xs font-bold border border-white/20 select-none shadow-sm cursor-pointer hover:ring-2 hover:ring-deep-green transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deep-green"
         >
-          {AUDIT_STATS.userInitials}
+          {userInitials}
         </div>
 
         {/* Re-run Audit Button */}
-        <div className="relative">
+        <div>
           <Button
             variant="primary"
             size="md"
-            onClick={handleRerun}
-            disabled={isRunningAudit}
+            onClick={() => setAuditModalOpen(true)}
             className="rounded-full shadow-glass-button gap-2 text-xs sm:text-sm font-semibold px-5"
             aria-label="Re-run accessibility audit"
           >
-            <RefreshCw
-              className={`w-3.5 h-3.5 ${isRunningAudit ? 'animate-spin' : ''}`}
-              aria-hidden="true"
-            />
-            <span>{isRunningAudit ? 'Auditing...' : 'Re-run audit'}</span>
+            <RefreshCw className="w-3.5 h-3.5" aria-hidden="true" />
+            <span>Re-run audit</span>
           </Button>
-
-          {showRerunNotice && (
-            <div
-              role="alert"
-              className="absolute right-0 top-full mt-2 bg-forest text-mist text-xs px-3 py-1.5 rounded-xl shadow-lg border border-white/20 whitespace-nowrap animate-in fade-in"
-            >
-              Audit complete: score refreshed
-            </div>
-          )}
         </div>
       </div>
 
@@ -180,19 +146,14 @@ export const TopBar: React.FC<TopBarProps> = ({
         <Button
           variant="primary"
           size="md"
-          onClick={handleRerun}
-          disabled={isRunningAudit}
+          onClick={() => setAuditModalOpen(true)}
           className="w-full rounded-full gap-2 text-sm font-semibold"
           aria-label="Re-run accessibility audit"
         >
-          <RefreshCw
-            className={`w-4 h-4 ${isRunningAudit ? 'animate-spin' : ''}`}
-            aria-hidden="true"
-          />
-          <span>{isRunningAudit ? 'Auditing...' : 'Re-run audit'}</span>
+          <RefreshCw className="w-4 h-4" aria-hidden="true" />
+          <span>Re-run audit</span>
         </Button>
       </div>
     </header>
   );
 };
-

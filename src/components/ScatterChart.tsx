@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { SCATTER_POINTS, ScatterPoint, SeverityLevel } from '@/data/mockData';
+import { useAuditStore } from '@/lib/store';
+import { PrioritisedIssueGroup, SeverityLevel } from '@/lib/prioritise';
 import { BarChart2 } from 'lucide-react';
 
 export const ScatterChart: React.FC = () => {
-  const [activePoint, setActivePoint] = useState<ScatterPoint | null>(null);
+  const issues = useAuditStore((state) => state.issues);
+  const openDrawer = useAuditStore((state) => state.openDrawer);
+  const [activePoint, setActivePoint] = useState<PrioritisedIssueGroup | null>(null);
 
   const getPointColor = (severity: SeverityLevel) => {
     switch (severity) {
@@ -18,11 +21,19 @@ export const ScatterChart: React.FC = () => {
     }
   };
 
+  // Display top issues on chart
+  const chartIssues = issues.slice(0, 8);
+
   return (
     <div className="w-full">
-      <div className="flex items-center gap-2 mb-3">
-        <BarChart2 className="w-4 h-4 text-forest-600" aria-hidden="true" />
-        <h3 className="text-sm font-bold text-forest">Impact vs Effort</h3>
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <BarChart2 className="w-4 h-4 text-forest-600" aria-hidden="true" />
+          <h3 className="text-sm font-bold text-forest">Impact vs Effort</h3>
+        </div>
+        <span className="text-[10px] text-forest-500 font-semibold uppercase tracking-wider">
+          Click point to view fix
+        </span>
       </div>
 
       {/* Chart container */}
@@ -50,38 +61,48 @@ export const ScatterChart: React.FC = () => {
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
           >
-            {SCATTER_POINTS.map((pt) => {
-              const cx = pt.effort;
-              const cy = 100 - pt.impact;
+            {chartIssues.map((pt) => {
+              const cx = Math.max(10, Math.min(90, pt.effortScore));
+              const cy = Math.max(10, Math.min(90, 100 - pt.impactScore));
               const color = getPointColor(pt.severity);
 
               return (
-                <g key={pt.id} className="cursor-pointer">
-                  {/* Subtle outer halo circle */}
+                <g
+                  key={pt.id}
+                  className="cursor-pointer group"
+                  onClick={() => openDrawer(pt.id)}
+                >
+                  {/* Outer pulse / halo */}
                   <circle
                     cx={cx}
                     cy={cy}
-                    r="7"
+                    r="7.5"
                     fill={color}
-                    fillOpacity="0.25"
-                    className="transition-transform duration-200 hover:scale-125"
+                    fillOpacity={pt.isFixed ? '0.1' : '0.28'}
+                    className="transition-transform duration-200 group-hover:scale-150"
                   />
-                  {/* Core dot */}
+                  {/* Core interactive dot */}
                   <circle
                     cx={cx}
                     cy={cy}
-                    r="4.2"
+                    r="4.5"
                     fill={color}
+                    opacity={pt.isFixed ? 0.4 : 1}
                     stroke="#ECECE4"
                     strokeWidth="1.2"
                     tabIndex={0}
                     role="button"
-                    aria-label={`${pt.name}: ${pt.severity} severity, impact ${pt.impact}%, effort ${pt.effort}%`}
+                    aria-label={`${pt.wcagCode}: ${pt.severity} severity, impact ${pt.impactScore}%, effort ${pt.effortScore}%`}
                     onMouseEnter={() => setActivePoint(pt)}
                     onMouseLeave={() => setActivePoint(null)}
                     onFocus={() => setActivePoint(pt)}
                     onBlur={() => setActivePoint(null)}
-                    className="focus:outline-none focus:stroke-forest transition-transform hover:scale-125"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        openDrawer(pt.id);
+                      }
+                    }}
+                    className="focus:outline-none focus:stroke-forest transition-transform group-hover:scale-125"
                   />
                 </g>
               );
@@ -91,8 +112,10 @@ export const ScatterChart: React.FC = () => {
           {/* Tooltip on active point */}
           {activePoint && (
             <div className="absolute bottom-2 left-2 right-2 bg-forest text-mist text-[11px] px-2.5 py-1.5 rounded-lg shadow-lg flex items-center justify-between pointer-events-none z-10 border border-white/20">
-              <span className="font-semibold">{activePoint.name}</span>
-              <span className="capitalize opacity-85 text-[10px]">{activePoint.severity}</span>
+              <span className="font-semibold truncate max-w-[200px]">{activePoint.wcagCode}</span>
+              <span className="capitalize opacity-85 text-[10px]">
+                {activePoint.severity} &bull; Click to fix
+              </span>
             </div>
           )}
         </div>
